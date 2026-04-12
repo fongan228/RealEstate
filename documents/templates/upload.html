@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-b from-black via-gray-900 to-black text-white">
+
+<div class="max-w-5xl mx-auto min-h-screen px-6 py-8">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-8">
+        <div class="text-2xl">☰</div>
+        <h1 class="text-xl font-semibold">Загрузка документов</h1>
+        <div class="text-2xl">👤</div>
+    </div>
+
+    <!-- Description -->
+    <p class="text-gray-400 mb-6">
+        Загрузите документы недвижимости для автоматического анализа
+    </p>
+
+    <!-- 🔥 Upload Block -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 shadow-lg">
+
+        <form method="post" enctype="multipart/form-data" class="text-center">
+            {% csrf_token %}
+
+            <!-- Drop Zone -->
+            <label class="block border-2 border-dashed border-gray-600 rounded-2xl p-12 cursor-pointer hover:border-gray-400 transition">
+
+                <div class="text-5xl mb-4">⬇️</div>
+
+                <p class="text-lg mb-2">Нажмите для выбора файлов</p>
+                <p class="text-gray-400 text-sm">или перетащите файл сюда</p>
+
+                <input type="file" name="file" class="hidden">
+
+            </label>
+
+            <!-- Button -->
+            <button type="submit"
+                    class="mt-6 px-8 py-3 bg-black border border-gray-600 rounded-xl hover:bg-gray-700 transition">
+                Загрузить документ
+            </button>
+
+        </form>
+
+        <p class="text-sm text-gray-500 mt-4 text-center">
+            Поддерживаемые форматы: PDF, JPG, PNG (макс. 10MB)
+        </p>
+
+    </div>
+
+    <!-- 🔥 Steps (сетка под ПК) -->
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+
+        <div class="bg-gray-800 p-5 rounded-2xl">
+            <h2 class="font-semibold mb-2">Шаг 1</h2>
+            <p class="text-gray-400 text-sm">
+                Загрузите документ недвижимости
+            </p>
+        </div>
+
+        <div class="bg-gray-800 p-5 rounded-2xl">
+            <h2 class="font-semibold mb-2">Шаг 2</h2>
+            <p class="text-gray-400 text-sm">
+                AI извлекает структурированные данные
+            </p>
+        </div>
+
+        <div class="bg-gray-800 p-5 rounded-2xl">
+            <h2 class="font-semibold mb-2">Шаг 3</h2>
+            <p class="text-gray-400 text-sm">
+                Просмотрите результаты и риски
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Back -->
+    <a href="/dashboard/">
+        <button class="w-full py-3 bg-gray-700 rounded-xl hover:bg-gray-600 transition">
+            Назад
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>

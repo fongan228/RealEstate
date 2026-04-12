@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-b from-black via-gray-900 to-black text-white">
+
+<!-- 🔥 Главный контейнер -->
+<div class="max-w-5xl mx-auto min-h-screen px-6 py-8">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-8">
+        <div class="text-2xl">☰</div>
+        <h1 class="text-xl font-semibold">My Documents</h1>
+        <div class="text-2xl">👤</div>
+    </div>
+
+    <!-- Search -->
+    <input type="text"
+           placeholder="Search..."
+           class="w-full mb-6 px-5 py-3 rounded-full bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
+
+    <!-- 🔥 Основная сетка -->
+    <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Левая колонка -->
+        <div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+
+                <div class="bg-gray-800 p-5 rounded-2xl">
+                    <p class="text-xs text-gray-400">Проанализировано</p>
+                    <h2 class="text-2xl font-bold">{{ documents|length }}</h2>
+                    <p class="text-green-400 text-xs">+9%</p>
+                </div>
+
+                <div class="bg-gray-800 p-5 rounded-2xl">
+                    <p class="text-xs text-gray-400">Риски</p>
+                    <h2 class="text-2xl font-bold">4</h2>
+                    <p class="text-green-400 text-xs">+2%</p>
+                </div>
+
+                <div class="bg-gray-800 p-5 rounded-2xl">
+                    <p class="text-xs text-gray-400">Обработано</p>
+                    <h2 class="text-2xl font-bold">159</h2>
+                    <p class="text-green-400 text-xs">+5%</p>
+                </div>
+
+                <div class="bg-gray-800 p-5 rounded-2xl">
+                    <p class="text-xs text-gray-400">Анализ за месяц</p>
+                    <h2 class="text-2xl font-bold">71</h2>
+                    <p class="text-green-400 text-xs">+19%</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Правая колонка -->
+        <div>
+
+            <!-- Documents -->
+            <div class="bg-gray-800 rounded-2xl p-5 mb-6 shadow-lg h-full">
+
+                <h2 class="text-lg mb-4 font-semibold">Последние документы</h2>
+
+                <div class="space-y-3 text-sm">
+
+                    {% for doc in documents %}
+                        <a href="/document/{{ doc.id }}/">
+                            <div class="flex justify-between items-center bg-gray-900 p-3 rounded-xl hover:bg-gray-700 transition">
+
+                                <div class="flex items-center gap-2">
+                                    <span>📄</span>
+                                    <span class="truncate max-w-[200px]">
+                                        {{ doc.file_name }}
+                                    </span>
+                                </div>
+
+                                {% if doc.status == "done" %}
+                                    <span class="text-xs px-2 py-1 bg-green-900 text-green-400 rounded-full">
+                                        Завершено
+                                    </span>
+                                {% elif doc.status == "processing" %}
+                                    <span class="text-xs px-2 py-1 bg-yellow-900 text-yellow-400 rounded-full">
+                                        Обработка
+                                    </span>
+                                {% else %}
+                                    <span class="text-xs px-2 py-1 bg-red-900 text-red-400 rounded-full">
+                                        Ошибка
+                                    </span>
+                                {% endif %}
+
+                            </div>
+                        </a>
+                    {% empty %}
+                        <p class="text-gray-400 text-center">Нет документов</p>
+                    {% endfor %}
+
+                </div>
+
+                <button class="mt-4 w-full py-2 bg-gray-700 rounded-xl hover:bg-gray-600 transition">
+                    Показать все
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Upload -->
+    <div class="mt-6">
+        <a href="/upload/">
+            <button class="w-full py-4 rounded-2xl border border-gray-600 flex items-center justify-center gap-2 hover:bg-gray-800 transition shadow-lg">
+                ⬇️ Загрузить новый документ
+            </button>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
