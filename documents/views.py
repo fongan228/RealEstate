@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Document, Processing, ExtractedData, Risk
+from .hubspot_integration import send_document_to_hubspot
 
 
 def login_view(request):
@@ -72,6 +73,8 @@ def upload_document(request):
 
             processing.status = "done"
             processing.save()
+            
+            send_document_to_hubspot(document)
 
             return redirect(f'/document/{document.id}/')
 

@@ -126,3 +126,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 ALLOWED_HOSTS = ['*']
 
 DEBUG = False
+
+
+HUBSPOT_TOKEN = "pat-eu1-afcfb741-38ad-4ad8-9b2e-e133be63d858"
